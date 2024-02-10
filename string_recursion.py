@@ -9,7 +9,14 @@ class String:
         return String.print_dashed(s[1:])
 
     def remove_char(s, c):
-        pass
+        if s is None or s == " ":
+            return s
+        removed_from_rest = String.remove_char(s[1:], c)
+        if s[0] ==c:
+            return removed_from_rest
+        else:
+            return s[0] + removed_from_rest
+
 
     def to_upper_case(s):
         if s is None or s == "":
@@ -31,7 +38,14 @@ class String:
 
 
     def prune(s):
-        pass
+        if s is None or s == '':
+            return s
+        if s[0] ==" ":
+            return String.prune(s[1:])
+        elif s[-1] == " ":
+            return String.prune(s[:-1])
+        return s
+
 
 if __name__ == "__main__":
     String.print_dashed("hello")
