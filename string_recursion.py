@@ -19,7 +19,7 @@ class String:
 
 
     def to_upper_case(s):
-        if s is None or s == "":
+        if s is None or s == '':
             return s 
         
         upper = String.to_upper_case(s[1:])  
@@ -27,13 +27,15 @@ class String:
         
 
     def get_index(s, c):
-        if s[c] == -1:
+        if c not in s:
             return -1
-        index_of_rest= get_index(s[1:],c)
         if s[0] == c:
-            return 1+ index_of_rest
+            return 0
+        index_of_rest= String.get_index(s[1:],c)
+        if index_of_rest == -1:
+            return -1
         else:
-            return index_of_rest
+            return index_of_rest +1
         
 
 
@@ -46,10 +48,27 @@ class String:
             return String.prune(s[:-1])
         return s
 
+        if s is None or s =='':
+            return -1
+        if s[0] == ' ':
+            return  String.prune(s[1:])
+        if s[-1] == " ":
+            return String.prune(s[:-1])
+        return s
+        
 
 if __name__ == "__main__":
     String.print_dashed("hello")
     ans =String.to_upper_case('hi')
     print(ans)
-    index = get_index('hello', 'z')
-    print(index)
+    index = String.get_index('elephant','t')
+    print(f'index: {index}')
+
+    removed = String.remove_char('apple','a')
+    print(f"removed : {removed}")
+
+    removed1 = String.remove_char('banana','a')
+    print(f"removed : {removed1}")
+
+    pruned = String.prune('   hello world   ')
+    print(f"pruned: {pruned}")
